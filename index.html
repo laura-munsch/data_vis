@@ -7,16 +7,18 @@
     <title>D3.js | TP1</title>
 </head>
 <body>
-    <h1>Visualisation de données | TP1</h1>
+    <div class="container">
+        <h1 class="mt-3 mb-4">Visualisation de données | TP1</h1>
 
-    <button id="ajouter-donnees" class="btn btn-primary">Ajouter les données</button>
-    <button id="supprimer-donnees" class="btn btn-primary">Supprimer les données</button>
-
-    <table class="table">
-        <tbody id="container">
-            <!-- Affichage des données -->
-        </tbody>
-    </table>
+        <button id="ajouter-donnees" class="btn btn-outline-primary">Ajouter les données</button>
+        <button id="supprimer-donnees" class="btn btn-outline-secondary">Supprimer les données</button>
+    
+        <table class="table mt-4">
+            <tbody id="container">
+                <!-- Affichage des données -->
+            </tbody>
+        </table>
+    </div>
 
     <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
