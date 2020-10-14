@@ -9,16 +9,16 @@ window.onload = function () {
     let source = './data/small-data.tsv';
     let source2 = './data/large-data.tsv';
 
-    // définition du container :
-    let container = d3.select('#container');
-    container.classed('striped', true);
+    // définition des containers :
+    let thead = d3.select('#tableau-head');
+    let tbody = d3.select('#tableau-body');
 
     function gestionDonnes(src) {
         d3.tsv(src).then((data,error) => {
             if (error) throw error;
             
             // on sélectionne les données 
-            let selection = container
+            let selection = tbody
                 .selectAll('tr')
                 .data(data);
 
@@ -28,7 +28,7 @@ window.onload = function () {
                 .remove();
             
             // enter : ajout et update : modification 
-            // on fusionne la sélection avec ce qu'il y avait avant, en affichant le nom
+            // on fusionne la sélection existante et on affiche toutes les lignes du tableau 
             let lignes = selection
                 .enter()
                 .append('tr')
@@ -56,7 +56,18 @@ window.onload = function () {
         // sinon :
         console.log(data);
 
-        let lignes = container
+        // afficher le nom des colomnes
+        thead 
+            .selectAll('td')
+            .data(data.columns)
+            .enter()
+            .append('td')
+            .text((d) => {
+                return d;
+            });
+
+        // afficher chacune des lignes
+        let lignes = tbody
             .selectAll('tr')
             .data(data)
             .enter()
