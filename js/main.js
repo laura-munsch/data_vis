@@ -19,7 +19,7 @@ window.onload = function () {
             
             // on sélectionne les données 
             let selection = container
-                .selectAll('div')
+                .selectAll('tr')
                 .data(data);
 
             // exit : gestion de la suppresion
@@ -29,12 +29,20 @@ window.onload = function () {
             
             // enter : ajout et update : modification 
             // on fusionne la sélection avec ce qu'il y avait avant, en affichant le nom
-            selection
+            let lignes = selection
                 .enter()
-                .append('div')
-                .merge(selection)
+                .append('tr')
+                .merge(selection);
+
+            lignes 
+                .selectAll('td')
+                .data((datum) => {
+                    return Object.values(datum);
+                })
+                .enter()
+                .append('td')
                 .text((d) => {
-                    return d.Name;
+                    return d;
                 });
         });
     }
@@ -48,14 +56,21 @@ window.onload = function () {
         // sinon :
         console.log(data);
 
-        container
-            .selectAll('div')
+        let lignes = container
+            .selectAll('tr')
             .data(data)
             .enter()
-            .append('div')
-            .classed('striped', true)
+            .append('tr');
+
+        lignes
+            .selectAll('td')
+            .data((datum) => {
+                return Object.values(datum);
+            })
+            .enter()
+            .append('td')
             .text((d) => {
-                return d.Name;
+                return d;
             });
     });
 
